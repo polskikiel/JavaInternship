@@ -13,7 +13,7 @@ public class GitServices {
     private RestTemplate restTemplate;
 
     public void getUser() {
-        restTemplate.exchange("/applications/grants/1", HttpMethod.GET, HttpEntity.EMPTY, UserDto.class).getBody();
+        restTemplate.exchange("https://api.github.com/applications/grants/1", HttpMethod.GET, HttpEntity.EMPTY, UserDto.class).getBody();
         System.out.println();
     }
 
