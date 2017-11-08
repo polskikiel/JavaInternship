@@ -20,6 +20,9 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'https://repo.spring.io/libs-milestone'
+	}
 }
 
 
@@ -29,4 +32,5 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'jstl', name: 'jstl', version: '1.2'
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
 }
