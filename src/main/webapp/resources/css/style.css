@@ -1,10 +1,13 @@
+html {
+    font-family: "Agency FB",sans-serif;
+}
 .userInfo {
-    float: left;
 }
 .userInfo img {
     height: 40px;
     width: 40px;
     border-radius: 20px;
+    margin: auto;
 }
 .userInfo p {
     text-align: center;
@@ -12,7 +15,6 @@
 }
 
 .publicRepos {
-    float: left;
 }
 
 
@@ -25,6 +27,7 @@
     [class*="col-"] {
         width: 100%;
         padding: 0;
+
     }
 
     [class*="mrg-"] {

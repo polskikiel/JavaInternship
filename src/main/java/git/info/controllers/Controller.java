@@ -43,7 +43,9 @@ public class Controller {
 
     @GetMapping("/info")
     public String info(Model model) {
-
+        if (!sessionServices.hasUser()) {
+            return "redirect:/";
+        }
         model.addAttribute("user", sessionServices.getUser());
 
         return "site";
