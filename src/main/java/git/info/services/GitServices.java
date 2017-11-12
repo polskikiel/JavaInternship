@@ -23,6 +23,7 @@ public class GitServices {
     @Getter
     private String gitId;
     @Value("${git.secret}")
+    @Getter
     private String gitSecret;
 
 
