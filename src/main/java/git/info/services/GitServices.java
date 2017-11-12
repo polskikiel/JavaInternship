@@ -49,7 +49,7 @@ public class GitServices {
 
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        headers.add("Authorization", token);
+        headers.add("Authorization", "token " + token);
 
         HttpEntity<UserDto> httpEntity = new HttpEntity<>(headers);
 
