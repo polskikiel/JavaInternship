@@ -11,5 +11,6 @@ import org.springframework.stereotype.Component;
 public class MySession {
     String state;
 
+    String accessToken;
 
 }

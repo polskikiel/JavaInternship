@@ -18,7 +18,15 @@ public class MySessionServices {
     }
 
     public boolean checkState(String state) {
-        return mySession.getState().equals(state);
+        return state != null && mySession.getState().equals(state);
+    }
+
+    public void setToken(String token) {
+        mySession.setAccessToken(token);
+    }
+
+    public String getToken() {
+        return mySession.getAccessToken();
     }
 
 }
