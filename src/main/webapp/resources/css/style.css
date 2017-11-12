@@ -1,7 +1,13 @@
 html {
     font-family: "Agency FB",sans-serif;
 }
+
+body {
+    background-color: #bfbfbf;
+}
+
 .userInfo {
+    margin-top: 15px;
 }
 .userInfo img {
     height: 40px;
