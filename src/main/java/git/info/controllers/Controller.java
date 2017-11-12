@@ -17,11 +17,15 @@ public class Controller {
 
     @GetMapping({"", "/"})
     public String getAuth() {
+
+        if(sessionServices.hasUser())   // if session contains user we don't need to get it from Github
+            return "redirect:/info";
+
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
 
-    @RequestMapping("/git")
+    @RequestMapping("/git")     // CALLBACK URL
     public String git(@RequestParam("code") String code,
                       @RequestParam("state") String state) {
 
@@ -32,17 +36,20 @@ public class Controller {
 
         sessionServices.setToken(gitServices.getAccessToken(code));
 
+        sessionServices.setUser(gitServices.getUserInfo(sessionServices.getToken()));
+
         return "redirect:/info";
     }
 
     @GetMapping("/info")
     public String info(Model model) {
 
-        System.out.println(sessionServices.getToken());
+        model.addAttribute("user", sessionServices.getUser());
+
         return "site";
     }
 
-    @RequestMapping("/aerror")
+    @RequestMapping("/aerror")   /*   /error already mapped by spring   */
     public String error(Model model) {
         model.addAttribute("error", "Auth failure - try login again");
         return "error";

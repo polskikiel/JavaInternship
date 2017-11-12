@@ -31,8 +31,6 @@ public class GitServices {
     @Value("${git.secret}")
     private String gitSecret;
 
-
-
     public String getAccessToken(String code) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -43,6 +41,21 @@ public class GitServices {
                 "&client_secret=" + getGitSecret() + "&code=" + code,
                 HttpMethod.POST, httpEntity, AccessTokenDto.class).getBody().getAccess_token();
 
+        // we can also get requested permission scopes and type of the token (from AccessTokenDto)
     }
+
+    public UserDto getUserInfo(String token) {
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        headers.add("Authorization", token);
+
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange
+                ("https://api.github.com/user", HttpMethod.GET, httpEntity, UserDto.class).getBody();
+    }
+
 
 }

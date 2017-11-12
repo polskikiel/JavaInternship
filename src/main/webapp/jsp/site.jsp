@@ -9,6 +9,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/> " type="text/css">
 </head>
 <body>
-ghfh
+${user.email}
 </body>
 </html>

@@ -1,6 +1,7 @@
 package git.info.services;
 
 import git.info.components.MySession;
+import git.info.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,18 @@ public class MySessionServices {
 
     public String getToken() {
         return mySession.getAccessToken();
+    }
+
+    public void setUser(UserDto userDto) {
+        mySession.setUser(userDto);
+    }
+
+    public UserDto getUser() {
+        return mySession.getUser();
+    }
+
+    public boolean hasUser() {
+        return mySession.getUser() != null;
     }
 
 }

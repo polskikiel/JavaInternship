@@ -1,5 +1,6 @@
 package git.info.components;
 
+import git.info.dto.UserDto;
 import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -13,4 +14,5 @@ public class MySession {
 
     String accessToken;
 
+    UserDto user;
 }
