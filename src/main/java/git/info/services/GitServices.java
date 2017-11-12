@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @Service
 public class GitServices {
@@ -32,10 +35,9 @@ public class GitServices {
 
     public String getAccessToken(String code) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept",
-                "application/vnd.github.v3+json");    // using json v3 version of GitHub api
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
+        HttpEntity<AccessTokenDto> httpEntity = new HttpEntity<>(headers);
 
         return restTemplate.exchange("https://github.com/login/oauth/access_token?client_id=" + getGitId() +
                 "&client_secret=" + getGitSecret() + "&code=" + code,
