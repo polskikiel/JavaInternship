@@ -12,7 +12,9 @@
 
 <section class="userInfo mrg-3 col-2">
 
-    <img src="${user.avatar_url}">
+    <a href="${user.url}">
+        <img src="${user.avatar_url}">
+    </a>
     <br/>
 
     <p>
@@ -23,7 +25,7 @@
     </p>
 </section>
 
-<section class="publicRepos mrg-3 col-3">
+<section class="publicRepos mrg-1 col-3">
 REPO NAZWA OPIS LINK
 </section>
 <div style="clear: both"></div>
