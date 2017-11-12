@@ -12,7 +12,7 @@ public class Controller {
 
     @GetMapping({"", "/"})
     public String getInfo() {
-        gitServices.getUser();
-        return "site";
+
+        return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId();
     }
 }
