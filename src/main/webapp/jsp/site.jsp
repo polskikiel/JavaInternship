@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/> " type="text/css">
 </head>
 <body>
-${user.email}
+
+<section class="userInfo mrg-5 col-4">
+
+    <img src="${user.avatar_url}">
+    <br/>
+
+    <p>
+        Name: ${user.name}
+    </p>
+    <p>
+        Email: ${user.email}
+    </p>
+</section>
+
+<section class="publicRepos mrg-1 col-3">
+alala
+</section>
+
 </body>
 </html>

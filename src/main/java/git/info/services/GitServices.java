@@ -50,6 +50,7 @@ public class GitServices {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         headers.add("Authorization", "token " + token);
+        // sending auth token by header - cleaner solution
 
         HttpEntity<UserDto> httpEntity = new HttpEntity<>(headers);
 
