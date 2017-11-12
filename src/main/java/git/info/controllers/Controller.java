@@ -26,7 +26,7 @@ public class Controller {
                       @RequestParam("state") String state) {
 
         if (!sessionServices.checkState(state) || code == null) {
-            return "redirect:/error";
+            return "redirect:/aerror";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
@@ -42,7 +42,7 @@ public class Controller {
         return "site";
     }
 
-    @RequestMapping("/error")
+    @RequestMapping("/aerror")
     public String error(Model model) {
         model.addAttribute("error", "Auth failure - try login again");
         return "error";
