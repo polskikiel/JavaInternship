@@ -33,18 +33,17 @@
 
     <h4>Projects written in:</h4>
 
-    <div>
-        <c:forEach items="${usedLanguagesMap}" var="entry">
-            <p>${entry.key} - ${entry.value}</p>
-        </c:forEach>
-        <br/>
 
-        <h4>Number of all bytes written by you in every language</h4>
+    <c:forEach items="${usedLanguagesMap}" var="entry">
+        <p style="font-size: 14px;">${entry.key} - ${entry.value}</p>
+    </c:forEach>
+    <br/>
 
-        <c:forEach items="${mergedLanguageMaps}" var="entry">
-            <p>${entry.key} - ${entry. value}</p>
-        </c:forEach>
-    </div>
+    <h4>Number of all bytes written by you in every language</h4>
+
+    <c:forEach items="${mergedLanguageMaps}" var="entry">
+        <p style="font-size: 14px;">${entry.key} - ${entry. value}</p>
+    </c:forEach>
 
     <br/>
     <br/>
