@@ -13,6 +13,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(errorHandler).addPathPatterns("/**", "");
+        registry.addInterceptor(errorHandler).addPathPatterns("/**");
     }
 }
