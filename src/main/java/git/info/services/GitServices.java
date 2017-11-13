@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import git.info.dto.AccessTokenDto;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
+import git.info.util.MyJson;
 import lombok.Getter;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -23,6 +25,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GitServices {
@@ -73,25 +76,30 @@ public class GitServices {
                 }).getBody();
 
 
-        ObjectMapper objectMapper = new ObjectMapper();
 
         for (RepoDto repoDto : repoDtos) {
+            StringBuilder sb = new StringBuilder();
             try {
                 URL url = new URL(repoDto.getLanguages_url());
                 URLConnection urlConnection = url.openConnection();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
                         urlConnection.getInputStream(), "UTF-8"
                 ));
+
                 String input;
-                StringBuilder sb = new StringBuilder();
+
                 while ((input = bufferedReader.readLine()) != null) {
-                   // input.
+                    sb.append(input);
                 }
+
+                JSONObject object = new JSONObject(sb.toString());
+
+                Map<String, Integer> map = MyJson.toMap(object);
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //repoDto.setLanguagesMap();
         }
 
         userDto.setRepos(repoDtos);
