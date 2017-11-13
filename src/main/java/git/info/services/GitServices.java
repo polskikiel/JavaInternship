@@ -15,8 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,11 +72,23 @@ public class GitServices {
                 new ParameterizedTypeReference<List<RepoDto>>() {
                 }).getBody();
 
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
         for (RepoDto repoDto : repoDtos) {
             try {
-                URL url = new URL("https://enigmatic-journey-30819.herokuapp.com");
+                URL url = new URL(repoDto.getLanguages_url());
+                URLConnection urlConnection = url.openConnection();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                        urlConnection.getInputStream(), "UTF-8"
+                ));
+                String input;
+                StringBuilder sb = new StringBuilder();
+                while ((input = bufferedReader.readLine()) != null) {
+                   // input.
+                }
 
-            } catch (MalformedURLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             //repoDto.setLanguagesMap();
@@ -80,7 +96,6 @@ public class GitServices {
 
         userDto.setRepos(repoDtos);
 
-        ObjectMapper objectMapper = new ObjectMapper();
 
 
 
