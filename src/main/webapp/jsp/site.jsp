@@ -7,10 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>GitInfo</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/> " type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
 
-<section class="userInfo mrg-3 col-2">
+<section class="userInfo mrg-2 col-3">
 
     <a href="${user.html_url}">
         <img src="${user.avatar_url}">
@@ -18,19 +19,19 @@
     <br/>
 
     <p>
-        Name: ${user.name}
+        ${user.name}
     </p>
     <p>
-        Email: ${user.email}
+        ${user.email}
     </p>
 </section>
 
-<section class="publicRepos mrg-1 col-3">
+<section class="publicRepos mrg-2 col-5">
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
+            <b>${repo.name}</b><br/>
             ${repo.language}<br/>
-            ${repo.description}<br/>
-            XDDD
+            ${repo.description}<br/><br/>
         </c:if>
     </c:forEach>
 </section>

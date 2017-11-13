@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.*;
 
 public class MyJson {
-    public static Map<String, Integer> jsonToMap(JSONObject json) throws JSONException {
+    /*public static Map<String, Integer> jsonToMap(JSONObject json) throws JSONException {
         Map<String, Integer> retMap = new HashMap<>();
 
         if (json != JSONObject.NULL) {
@@ -36,5 +36,5 @@ public class MyJson {
             list.add(value);
         }
         return list;
-    }
+    }*/
 }

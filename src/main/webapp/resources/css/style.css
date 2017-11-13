@@ -1,5 +1,5 @@
 html {
-    font-family: "Agency FB",sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     border-radius: 30px;
 }
 .userInfo p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .publicRepos {
@@ -36,7 +36,7 @@ body {
     }
 
     [class*="mrg-"] {
-        margin-left: 0;
+        margin-left: 16%;
     }
 }
 
