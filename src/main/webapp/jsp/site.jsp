@@ -32,7 +32,7 @@
     <h4>Language statistics</h4>
     <br/>
 
-    <h6>Projects written in:</h6>
+    <h5>Projects written in:</h5>
     <br/>
 
     <c:forEach items="${usedLanguagesMap}" var="entry">
@@ -40,7 +40,7 @@
     </c:forEach>
     <br/>
 
-    <h6>Number of all bytes written by you in every language</h6>
+    <h5>Number of all bytes written by you in every language</h5>
     <br/>
 
     <c:forEach items="${mergedLanguageMaps}" var="entry">
@@ -56,11 +56,11 @@
 
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <p style="font-weight: 600;">
+            <p style="font-weight: 600; line-height: 40%;">
                 <a href="${repo.html_url}">${repo.name}</a>
             <p>
 
-            <p style="font-size: 10px; line-height: 90%;">
+            <p style="font-size: 10px;">
                 written in ${repo.language}
             </p>
 
