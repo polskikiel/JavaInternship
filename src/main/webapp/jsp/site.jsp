@@ -31,6 +31,8 @@
 
 <section class="publicRepos mrg-2 col-5">
     <h2>Public repositories</h2>
+    <br/><hr>
+
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
             <p style="font-weight: 600">
@@ -41,13 +43,14 @@
                 written in ${repo.language}
             </p>
 
-            <p style="text-align: right; font-size: 10px;">
-                    ${fn:split(repo.created_at, 'T')[0]}
-                    ${fn:substring(fn:split(repo.created_at, 'T')[1], 1 , fn:length(fn:split(repo.created_at, 'T')[1]) - 1)}
-            </p>
-
             <p style="font-size: 14px">
                     ${repo.description}
+            </p>
+
+            <p style="text-align: right; font-size: 10px;">
+                created at: <br/>
+                    ${fn:split(repo.created_at, 'T')[0]}
+                    ${fn:substring(fn:split(repo.created_at, 'T')[1], 1 , fn:length(fn:split(repo.created_at, 'T')[1]) - 1)}
             </p>
 
             <br/>
