@@ -30,6 +30,8 @@
     </p>
     <br/>
     <h4>Language statistics</h4>
+    <br/>
+
 
 </section>
 
@@ -40,7 +42,7 @@
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
             <p style="font-weight: 600">
-                    ${repo.name}
+                <a href="${repo.html_url}">${repo.name}</a>
             <p>
 
             <p style="font-size: 10px">
@@ -52,7 +54,7 @@
             </p>
 
             <p style="text-align: right; font-size: 10px;">
-                created at: <br/>
+                created at <br/>
                     ${fn:split(repo.created_at, 'T')[0]}
                     ${fn:substring(fn:split(repo.created_at, 'T')[1], 1 , fn:length(fn:split(repo.created_at, 'T')[1]) - 1)}
             </p>

@@ -52,6 +52,10 @@ public class Controller {
         }
         model.addAttribute("user", sessionServices.getUser());
 
+        for (String key : sessionServices.getMostUsedLanguages().keySet()) {
+            System.out.println(key + " " + sessionServices.getMostUsedLanguages().get(key));
+        }
+
         return "site";
     }
 
