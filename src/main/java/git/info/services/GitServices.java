@@ -70,7 +70,7 @@ public class GitServices {
 
         for (RepoDto repoDto : repoDtos) {
             try {
-                URL url = new URL("");
+                URL url = new URL("https://enigmatic-journey-30819.herokuapp.com");
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
