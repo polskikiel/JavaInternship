@@ -17,7 +17,9 @@ body {
 .userInfo p {
     font-size: 18px;
 }
-
+div p {
+    font-size: 14px;
+}
 .publicRepos {
     margin-top: 15px;
 }

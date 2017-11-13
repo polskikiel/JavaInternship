@@ -33,18 +33,21 @@
 
     <h4>Projects written in:</h4>
 
-    <c:forEach items="${usedLanguagesMap}" var="entry">
-        <p>${entry.key} - ${entry.value}</p>
-    </c:forEach>
+    <div>
+        <c:forEach items="${usedLanguagesMap}" var="entry">
+            <p>${entry.key} - ${entry.value}</p>
+        </c:forEach>
+        <br/>
+
+        <h4>Number of all bytes written by you in every language</h4>
+
+        <c:forEach items="${mergedLanguageMaps}" var="entry">
+            <p>${entry.key} - ${entry. value}</p>
+        </c:forEach>
+    </div>
+
     <br/>
-
-    <h4>Number of all bytes written by you in every language</h4>
-
-    <c:forEach items="${mergedLanguageMaps}" var="entry">
-        <p>${entry.key} - ${entry. value}</p>
-    </c:forEach>
-
-
+    <br/>
 </section>
 
 <section class="publicRepos mrg-2 col-5">
