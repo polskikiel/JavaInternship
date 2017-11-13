@@ -87,6 +87,5 @@ public class GitServices {
         return userDto;
     }
 
-    private
 
 }
