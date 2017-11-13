@@ -28,7 +28,8 @@
 <section class="publicRepos mrg-1 col-3">
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-
+            ${repo.language}<br/>
+            ${repo.description}<br/>
         </c:if>
     </c:forEach>
 </section>
