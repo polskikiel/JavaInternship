@@ -24,8 +24,8 @@ body {
 .publicRepos p {
 
 }
-.publicRepos p .date {
-    float: right;
+.date {
+    text-align: right;
     font-size: 10px;
 }
 

@@ -30,11 +30,12 @@
 </section>
 
 <section class="publicRepos mrg-2 col-5">
+    <h2>Public repositories</h2>
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <p>${repo.name}<p>
-            <p class="date">${repo.language}</p>
-            <p>${repo.description}</p>
+            <p style="font-weight: 600">${repo.name}<p>
+            <p class="date">${repo.language} >${repo.created_at}</p>
+            <p style="text-align: center">${repo.description}</p>
 
             <br/>
         </c:if>
