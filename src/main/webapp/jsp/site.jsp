@@ -33,13 +33,22 @@
     <h2>Public repositories</h2>
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <p style="font-weight: 600">${repo.name}<p>
+            <p style="font-weight: 600">
+                    ${repo.name}
+            <p>
 
-            <p style="text-align: right; font-size: 10px;">
-                    ${repo.language} >${repo.created_at}
+            <p style="font-size: 10px">
+                written in ${repo.language}
             </p>
 
-            <p>${repo.description}</p>
+            <p style="text-align: right; font-size: 10px;">
+                    ${fn:split(repo.created_at, 'T')[0]}
+                    ${fn:substring(fn:split(repo.created_at, 'T')[1], 1 , fn:length(fn:split(repo.created_at, 'T')[1]) - 1)}
+            </p>
+
+            <p style="font-size: 14px">
+                    ${repo.description}
+            </p>
 
             <br/>
         </c:if>
