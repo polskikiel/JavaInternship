@@ -12,7 +12,7 @@ public class RepoDto {
     String name;
 
     @JsonProperty("private")
-    boolean isPrivate;
+    boolean priv;
 
     String description;
     String html_url;

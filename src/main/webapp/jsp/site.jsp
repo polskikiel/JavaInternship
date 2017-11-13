@@ -27,7 +27,7 @@
 
 <section class="publicRepos mrg-1 col-3">
     <c:forEach items="${user.repos}" var="repo">
-        <c:if test="${repo.isPrivate == false}">
+        <c:if test="${repo.priv == false}">
 
         </c:if>
     </c:forEach>
