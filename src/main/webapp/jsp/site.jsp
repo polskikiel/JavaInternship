@@ -12,7 +12,7 @@
 
 <section class="userInfo mrg-3 col-2">
 
-    <a href="${user.url}">
+    <a href="${user.html_url}">
         <img src="${user.avatar_url}">
     </a>
     <br/>
@@ -26,7 +26,11 @@
 </section>
 
 <section class="publicRepos mrg-1 col-3">
-REPO NAZWA OPIS LINK
+    <c:forEach items="${user.repos}" var="repo">
+        <c:if test="${repo.private == false}">
+
+        </c:if>
+    </c:forEach>
 </section>
 <div style="clear: both"></div>
 </body>

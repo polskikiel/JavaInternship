@@ -13,7 +13,8 @@ public class UserDto {
     String email;
     String avatar_url;
     String repos_url;
-    String url;
+    String html_url;
+    String bio;
 
     List<RepoDto> repos;
     // ^we are setting this manually, using repos_url

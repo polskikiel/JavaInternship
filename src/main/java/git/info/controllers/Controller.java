@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 @org.springframework.stereotype.Controller
 @AllArgsConstructor
 public class Controller {
@@ -25,7 +30,7 @@ public class Controller {
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
 
-    @RequestMapping("/git")     // CALLBACK URL
+    @RequestMapping("/git")     // GIT CALLBACK URL
     public String git(@RequestParam("code") String code,
                       @RequestParam("state") String state) {
 
@@ -35,7 +40,6 @@ public class Controller {
         }
 
         sessionServices.setToken(gitServices.getAccessToken(code));
-
         sessionServices.setUser(gitServices.getUserInfo(sessionServices.getToken()));
 
         return "redirect:/info";
@@ -43,7 +47,7 @@ public class Controller {
 
     @GetMapping("/info")
     public String info(Model model) {
-        if (!sessionServices.hasUser()) {
+        if (!sessionServices.hasUser()) {   // and go back if don't
             return "redirect:/";
         }
         model.addAttribute("user", sessionServices.getUser());
@@ -55,5 +59,17 @@ public class Controller {
     public String error(Model model) {
         model.addAttribute("error", "Auth failure - try login again");
         return "error";
+    }
+
+    private Map<String, Integer> getAllLanguages(HttpServletRequest request) {
+        Enumeration<String> e = request.getAttributeNames();
+        Map<String, Integer> map = new HashMap<>();
+
+        while (e.hasMoreElements()) {
+            String key = e.nextElement();
+            map.put(key, (Integer) request.getAttribute(key));
+        }
+
+        return map;
     }
 }
