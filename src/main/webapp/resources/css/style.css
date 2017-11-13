@@ -21,6 +21,13 @@ body {
 .publicRepos {
     margin-top: 25px;
 }
+.publicRepos p {
+
+}
+.publicRepos p .date {
+    float: right;
+    font-size: 10px;
+}
 
 @media only screen and (min-width: 768px){
     [class*="col-"] {

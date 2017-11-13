@@ -24,14 +24,19 @@
     <p>
         ${user.email}
     </p>
+    <p>
+        ${user.bio}
+    </p>
 </section>
 
 <section class="publicRepos mrg-2 col-5">
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <b>${repo.name}</b><br/>
-            ${repo.language}<br/>
-            ${repo.description}<br/><br/>
+            <p>${repo.name}<p>
+            <p class="date">${repo.language}</p>
+            <p>${repo.description}</p>
+
+            <br/>
         </c:if>
     </c:forEach>
 </section>
