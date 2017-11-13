@@ -1,16 +1,12 @@
 package git.info.services;
 
 import git.info.components.MySession;
-import git.info.dto.LanguageDto;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,8 +32,30 @@ public class MySessionServices {
         return map;
     }
 
+    public Map<String, Integer> mergedLanguageMaps() {
+        Map<String, Integer> map = new HashMap<>();
+
+        try {
+            getUser().getRepos().
+                    forEach(repo -> repo.getLanguagesMap().
+                            forEach((key, value) -> map.merge(key, value, Integer::sum)));
+
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+
+        System.out.println(map);
+
+        return map;
+    }
+
+
     public boolean checkState(String state) {
-        return state != null && mySession.getState() != null && mySession.getState().equals(state);
+        try {
+            return mySession.getState().equals(state);
+        } catch (NullPointerException npe) {
+            return false;
+        }
     }
 
     public void setToken(String token) {
@@ -57,7 +75,7 @@ public class MySessionServices {
     }
 
     public boolean hasUser() {
-        return mySession.getUser() != null;
+        return mySession != null && mySession.getUser() != null;
     }
 
 }

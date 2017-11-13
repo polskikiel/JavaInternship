@@ -8,14 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class MyJson {
-    public static Map<String, Integer> jsonToMap(JSONObject json) throws JSONException {
-        Map<String, Integer> retMap = new HashMap<>();
-
-        if (json != JSONObject.NULL) {
-            retMap = toMap(json);
-        }
-        return retMap;
-    }
 
     public static Map<String, Integer> toMap(JSONObject object) throws JSONException {
         Map<String, Integer> map = new HashMap<>();

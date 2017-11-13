@@ -48,7 +48,7 @@ public class GitServices {
 
         return restTemplate.exchange("https://github.com/login/oauth/access_token?client_id=" + getGitId() +
                         "&client_secret=" + getGitSecret() + "&code=" + code,
-                HttpMethod.POST, httpEntity, AccessTokenDto.class).getBody().getAccess_token();
+                HttpMethod.POST, httpEntity, AccessTokenDto.class).getBody().getAccess_token(); // post4object
 
         // we can also get requested permission scopes and type of the token (from AccessTokenDto)
     }
@@ -60,10 +60,10 @@ public class GitServices {
         headers.add("Authorization", "token " + token);
         // sending auth token by header - cleaner solution
 
+
         HttpEntity<UserDto> httpEntity = new HttpEntity<>(headers);
         UserDto userDto = restTemplate.exchange
                 ("https://api.github.com/user", HttpMethod.GET, httpEntity, UserDto.class).getBody();
-
 
 
         HttpEntity<RepoDto> repoDtoHttpEntity = new HttpEntity<>(headers);
@@ -82,25 +82,20 @@ public class GitServices {
 
                 URLConnection urlConnection = url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "token " + token);
+                // with this we can get 5000 requests per hour instead of 50 when we are not authorized
 
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-                        urlConnection.getInputStream(), "UTF-8"     // 403 Forbidden sometimes
+                        urlConnection.getInputStream(), "UTF-8"
                 ));
 
                 String input;
-
                 while ((input = bufferedReader.readLine()) != null) {
                     sb.append(input);
                 }
 
                 JSONObject object = new JSONObject(sb.toString());
-                System.out.println(sb.toString());
 
                 repoDto.setLanguagesMap(MyJson.toMap(object));   // convert JSON to Map<String, Integer>
-
-                for (String key : repoDto.getLanguagesMap().keySet()) {
-                    System.out.println(key + " " + repoDto.getLanguagesMap().get(key));
-                }
 
             } catch (Exception e) {
                 e.printStackTrace();

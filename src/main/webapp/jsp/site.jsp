@@ -41,7 +41,7 @@
 
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <p style="font-weight: 600">
+            <p style="font-weight: 600; line-height: 90%;">
                 <a href="${repo.html_url}">${repo.name}</a>
             <p>
 

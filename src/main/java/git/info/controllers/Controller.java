@@ -52,9 +52,9 @@ public class Controller {
         }
         model.addAttribute("user", sessionServices.getUser());
 
-        for (String key : sessionServices.getMainRepoLanguages().keySet()) {
-            System.out.println(key + " " + sessionServices.getMainRepoLanguages().get(key));
-        }
+        model.addAttribute("usedLanguagesMap", sessionServices.getMainRepoLanguages());
+
+        model.addAttribute("mergedLanguageMaps", sessionServices.mergedLanguageMaps());
 
         return "site";
     }
@@ -65,15 +65,4 @@ public class Controller {
         return "error";
     }
 
-    private Map<String, Integer> getAllLanguages(HttpServletRequest request) {
-        Enumeration<String> e = request.getAttributeNames();
-        Map<String, Integer> map = new HashMap<>();
-
-        while (e.hasMoreElements()) {
-            String key = e.nextElement();
-            map.put(key, (Integer) request.getAttribute(key));
-        }
-
-        return map;
-    }
 }
