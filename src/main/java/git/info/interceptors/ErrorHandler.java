@@ -12,10 +12,10 @@ public class ErrorHandler implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        request.getSession(true);
+        request.getSession(true);       // creating session if it's don't exist
 
         if ((Integer) request
-                .getAttribute("javax.servlet.error.status_code") != null) {
+                .getAttribute("javax.servlet.error.status_code") != null) {     // catching every error
 
             response.sendRedirect("/errors?nr=" + (Integer) request
                     .getAttribute("javax.servlet.error.status_code"));

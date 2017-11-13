@@ -4,15 +4,20 @@ import git.info.components.MySession;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 @Service
 @AllArgsConstructor
 public class MySessionServices {
-    MySession mySession;
+
+    private MySession mySession;
 
     public String getState() {
         mySession.setState(UUID.randomUUID().toString());
