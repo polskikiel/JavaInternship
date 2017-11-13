@@ -1,12 +1,9 @@
 package git.info.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import git.info.dto.AccessTokenDto;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
-import git.info.util.MyJson;
 import lombok.Getter;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,15 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class GitServices {
@@ -77,7 +67,7 @@ public class GitServices {
 
 
 
-        for (RepoDto repoDto : repoDtos) {
+        /*for (RepoDto repoDto : repoDtos) {
             StringBuilder sb = new StringBuilder();
             try {
                 URL url = new URL(repoDto.getLanguages_url());
@@ -101,7 +91,7 @@ public class GitServices {
                 e.printStackTrace();
             }
         }
-
+*/
         userDto.setRepos(repoDtos);
 
 
