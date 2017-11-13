@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-
 @org.springframework.stereotype.Controller
 @AllArgsConstructor
 public class Controller {
@@ -46,7 +41,7 @@ public class Controller {
         return "redirect:/info";
     }
 
-    @GetMapping("/info")
+    @GetMapping("/info")    // this one in the end displays received model
     public String info(Model model) {
         if (!sessionServices.hasUser()) {   // and go back if don't
             return "redirect:/";
@@ -60,7 +55,7 @@ public class Controller {
         return "site";
     }
 
-    @RequestMapping("/errors")
+    @RequestMapping("/errors")  // custom error handling page
     public ModelAndView renderErrorPage(@RequestParam("nr") Integer nr) {
 
         ModelAndView errorPage = new ModelAndView("error");

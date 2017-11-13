@@ -23,6 +23,6 @@ public class RepoDto {
 
     Integer size;
 
-    // getting it manually
+    // getting it manually from languages_url
     Map<String, Integer> languagesMap;
 }

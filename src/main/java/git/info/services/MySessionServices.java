@@ -24,7 +24,7 @@ public class MySessionServices {
         return mySession.getState();
     }
 
-    public Map<String, Integer> getMainRepoLanguages() {
+    public Map<String, Integer> getMainRepoLanguages() {  // count main languages in every repo
         List<String > list = new ArrayList<>();
 
         for (RepoDto repoDto : getUser().getRepos()) {
@@ -37,7 +37,7 @@ public class MySessionServices {
         return map;
     }
 
-    public Map<String, Integer> mergedLanguageMaps() {
+    public Map<String, Integer> mergedLanguageMaps() {  // each language bytes from every repo
         Map<String, Integer> map = new HashMap<>();
 
         try {
@@ -53,7 +53,7 @@ public class MySessionServices {
     }
 
 
-    public boolean checkState(String state) {
+    public boolean checkState(String state) {       // check for third party
         try {
             return mySession.getState().equals(state);
         } catch (NullPointerException npe) {
@@ -77,7 +77,7 @@ public class MySessionServices {
         return mySession.getUser();
     }
 
-    public boolean hasUser() {
+    public boolean hasUser() {      // if don't - load again
         return mySession != null && mySession.getUser() != null;
     }
 
