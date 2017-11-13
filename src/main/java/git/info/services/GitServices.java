@@ -94,7 +94,7 @@ public class GitServices {
 
                 JSONObject object = new JSONObject(sb.toString());
 
-                Map<String, Integer> map = MyJson.toMap(object);
+                System.out.println(sb.toString());
 
 
             } catch (Exception e) {
