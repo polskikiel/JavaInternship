@@ -30,6 +30,7 @@
         <c:if test="${repo.priv == false}">
             ${repo.language}<br/>
             ${repo.description}<br/>
+            XDDD
         </c:if>
     </c:forEach>
 </section>
