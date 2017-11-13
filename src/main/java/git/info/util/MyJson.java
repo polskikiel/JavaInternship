@@ -32,12 +32,7 @@ public class MyJson {
     public static List<Integer> toList(JSONArray array) throws JSONException {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
-            Object value = array.get(i);
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
+            Integer value = (Integer) array.get(i);
             list.add(value);
         }
         return list;
