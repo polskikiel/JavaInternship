@@ -12,6 +12,8 @@
 <body>
 
 <section class="userInfo mrg-2 col-3">
+    <h2>Profile</h2>
+    <br/>
 
     <a href="${user.html_url}">
         <img src="${user.avatar_url}">
@@ -31,7 +33,8 @@
 
 <section class="publicRepos mrg-2 col-5">
     <h2>Public repositories</h2>
-    <br/><hr>
+    <hr>
+    <br/>
 
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
