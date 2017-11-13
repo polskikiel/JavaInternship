@@ -79,9 +79,12 @@ public class GitServices {
 
                 URL url = new URL(repoDto.getLanguages_url());
 
+
                 URLConnection urlConnection = url.openConnection();
+                urlConnection.setRequestProperty("Authorization", "token " + token);
+
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-                        urlConnection.getInputStream(), "UTF-8"
+                        urlConnection.getInputStream(), "UTF-8"     // 403 Forbidden sometimes
                 ));
 
                 String input;
