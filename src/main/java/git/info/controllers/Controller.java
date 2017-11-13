@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -35,7 +36,7 @@ public class Controller {
                       @RequestParam("state") String state) {
 
         if (!sessionServices.checkState(state) || code == null) {
-            return "redirect:/aerror";
+            return "redirect:/errors";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
@@ -59,10 +60,39 @@ public class Controller {
         return "site";
     }
 
-    @RequestMapping("/aerror")   /*   /error already mapped by spring   */
-    public String error(Model model) {
-        model.addAttribute("error", "Auth failure - try login again");
-        return "error";
+    @RequestMapping("/errors")
+    public ModelAndView renderErrorPage(@RequestParam("nr") Integer nr) {
+
+        ModelAndView errorPage = new ModelAndView("error");
+        String errorMsg;
+
+        switch (nr) {
+            case 400: {
+                errorMsg = "Http Error Code: 400. Bad Request";
+                break;
+            }
+            case 401: {
+                errorMsg = "Http Error Code: 401. Unauthorized";
+                break;
+            }
+            case 403:{
+                errorMsg = "Http Error Code: 403. Too much requests";   // from git api docs - 403 Forbidden
+                break;
+            }
+            case 404: {
+                errorMsg = "Http Error Code: 404. Resource not found";
+                break;
+            }
+            case 500: {
+                errorMsg = "Http Error Code: 500. Internal Server Error";
+                break;
+            }
+            default:{
+                errorMsg = "Ups! Something is not ok";
+            }
+        }
+        errorPage.addObject("errorMsg", errorMsg);
+        return errorPage;
     }
 
 }

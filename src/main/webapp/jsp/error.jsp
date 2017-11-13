@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/> " type="text/css">
 </head>
 <body>
-<a href="/">${error}</a>
+${errorMsg}
+<br/>
+<br/>
+<a href="/">Click here to try login again</a>
 </body>
 </html>

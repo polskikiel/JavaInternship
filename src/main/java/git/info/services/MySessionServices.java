@@ -44,8 +44,6 @@ public class MySessionServices {
             npe.printStackTrace();
         }
 
-        System.out.println(map);
-
         return map;
     }
 
