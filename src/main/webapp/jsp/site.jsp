@@ -13,7 +13,6 @@
 
 <section class="userInfo mrg-2 col-3">
     <h2>Profile</h2>
-    <br/>
 
     <a href="${user.html_url}">
         <img src="${user.avatar_url}">
@@ -33,7 +32,6 @@
 
 <section class="publicRepos mrg-2 col-5">
     <h2>Public repositories</h2>
-    <hr>
     <br/>
 
     <c:forEach items="${user.repos}" var="repo">
