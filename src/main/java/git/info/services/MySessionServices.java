@@ -23,7 +23,7 @@ public class MySessionServices {
         return mySession.getState();
     }
 
-    public Map<String, Integer> getMostUsedLanguages() {
+    public Map<String, Integer> getMainRepoLanguages() {
         List<String > list = new ArrayList<>();
 
         for (RepoDto repoDto : getUser().getRepos()) {
@@ -37,7 +37,7 @@ public class MySessionServices {
     }
 
     public boolean checkState(String state) {
-        return state != null && mySession.getState().equals(state);
+        return state != null && mySession.getState() != null && mySession.getState().equals(state);
     }
 
     public void setToken(String token) {

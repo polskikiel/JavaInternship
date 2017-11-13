@@ -21,6 +21,9 @@ body {
 .publicRepos {
     margin-top: 15px;
 }
+a {
+    text-decoration: none;
+}
 h2 {
     text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }

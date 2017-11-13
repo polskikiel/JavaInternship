@@ -3,6 +3,7 @@ package git.info.services;
 import git.info.dto.AccessTokenDto;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
+import git.info.util.MyJson;
 import lombok.Getter;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,15 +71,12 @@ public class GitServices {
                 new ParameterizedTypeReference<List<RepoDto>>() {
                 }).getBody();
 
-        /*for (RepoDto repoDto : repoDtos) {
-            repoDto.setLanguagesMap(
-                    restTemplate.exchange(repoDto.getLanguages_url(), HttpMethod.GET, HttpEntity.EMPTY,)
-            );
-        }
-*/
+
         for (RepoDto repoDto : repoDtos) {
-            StringBuilder sb = new StringBuilder();
-            try {
+            try {       // my way to map various languages which we can get in JSON response
+
+                StringBuilder sb = new StringBuilder();
+
                 URL url = new URL(repoDto.getLanguages_url());
 
                 URLConnection urlConnection = url.openConnection();
@@ -93,9 +91,13 @@ public class GitServices {
                 }
 
                 JSONObject object = new JSONObject(sb.toString());
-
                 System.out.println(sb.toString());
 
+                repoDto.setLanguagesMap(MyJson.toMap(object));   // convert JSON to Map<String, Integer>
+
+                for (String key : repoDto.getLanguagesMap().keySet()) {
+                    System.out.println(key + " " + repoDto.getLanguagesMap().get(key));
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -104,11 +106,7 @@ public class GitServices {
 
         userDto.setRepos(repoDtos);
 
-
-
-
         return userDto;
     }
-
 
 }
