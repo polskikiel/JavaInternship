@@ -29,19 +29,16 @@
         ${user.bio}
     </p>
     <br/>
-    <h4>Language statistics</h4>
-    <br/>
+    <h3>Language statistics</h3>
 
-    <h5>Projects written in:</h5>
-    <br/>
+    <h4>Projects written in:</h4>
 
     <c:forEach items="${usedLanguagesMap}" var="entry">
         <p>${entry.key} - ${entry.value}</p>
     </c:forEach>
     <br/>
 
-    <h5>Number of all bytes written by you in every language</h5>
-    <br/>
+    <h4>Number of all bytes written by you in every language</h4>
 
     <c:forEach items="${mergedLanguageMaps}" var="entry">
         <p>${entry.key} - ${entry. value}</p>
@@ -56,7 +53,7 @@
 
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
-            <p style="font-weight: 600; line-height: 40%;">
+            <p style="font-weight: 600; line-height: 0%;">
                 <a href="${repo.html_url}">${repo.name}</a>
             <p>
 
