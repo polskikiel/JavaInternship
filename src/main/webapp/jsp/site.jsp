@@ -34,8 +34,12 @@
     <c:forEach items="${user.repos}" var="repo">
         <c:if test="${repo.priv == false}">
             <p style="font-weight: 600">${repo.name}<p>
-            <p class="date">${repo.language} >${repo.created_at}</p>
-            <p style="text-align: center">${repo.description}</p>
+
+            <p style="text-align: right; font-size: 10px;">
+                    ${repo.language} >${repo.created_at}
+            </p>
+
+            <p>${repo.description}</p>
 
             <br/>
         </c:if>
