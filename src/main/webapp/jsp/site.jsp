@@ -28,6 +28,9 @@
     <p>
         ${user.bio}
     </p>
+    <br/>
+    <h4>Language statistics</h4>
+
 </section>
 
 <section class="publicRepos mrg-2 col-5">
