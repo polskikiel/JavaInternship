@@ -56,7 +56,7 @@ public class MySessionServices {
         }
 
         // sorting by value
-        return MyMaps.sortMapByValue(map);
+        return map;
     }
 
 
