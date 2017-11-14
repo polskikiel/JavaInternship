@@ -62,7 +62,7 @@ public class MySessionServices {
 
         return
                 map.entrySet().stream().    //  iterate through map entries
-                        sorted(Map.Entry.comparingByValue(Collections.reverseOrder())). //  sorting it by value
+                        sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
                         collect(Collectors.toMap(
                                 Map.Entry::getKey,
                                 Map.Entry::getValue,
