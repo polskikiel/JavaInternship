@@ -31,13 +31,13 @@ public class MySessionServices {
             list.add(repoDto.getLanguage());
         }
 
-        // group list by language and set their number of occurrences as value
+        // group list by language and set number of their occurrences as value
 
         Map<String, Integer> map =
                 list.stream().collect(Collectors.toMap(o -> o, o->1, Integer::sum));
 
 
-        return map;
+        return sortMapByValue(map);
     }
 
     public Map<String, Integer> mergedLanguageMaps() {  // each language bytes from every repo
@@ -55,17 +55,21 @@ public class MySessionServices {
         }
 
         // sorting by value
-
         return sortMapByValue(map);
     }
 
     private Map<String, Integer> sortMapByValue(Map<String, Integer> map) {
 
-        List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
+        return
+                map.entrySet().stream().    //  iterate through map entries
+                        sorted(Map.Entry.comparingByValue(Collections.reverseOrder())). //  sorting it by value
+                        collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (e1, e2) -> e1,
+                                HashMap::new    //  then collect it to HashMap with same key and value
+                        ));
 
-        Collections.sort(list, Comparator.comparing(map::get));
-
-        return map;
     }
 
 
