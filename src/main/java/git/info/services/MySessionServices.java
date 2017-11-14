@@ -65,9 +65,7 @@ public class MySessionServices {
                         sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
                         collect(Collectors.toMap(
                                 Map.Entry::getKey,
-                                Map.Entry::getValue,
-                                (e1, e2) -> e1,
-                                HashMap::new    //  then collect it to HashMap with same key and value
+                                Map.Entry::getValue   //  then collect it to HashMap with same key and value
                         ));
 
     }
