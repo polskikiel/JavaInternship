@@ -61,7 +61,7 @@
             <p>
 
             <p style="font-size: 10px;">
-                in ${repo.language}
+                written in ${repo.language}
             </p>
 
             <p style="font-size: 14px">
