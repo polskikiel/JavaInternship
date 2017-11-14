@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<main class="site mrg-5">
+<main class="site">
 <section class="userInfo mrg-2 col-3">
     <h2>Profile</h2>
 
