@@ -21,9 +21,7 @@ public class ErrorHandler implements HandlerInterceptor {
         HttpSession session = request.getSession(true);
 
         if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*60*1) {
-            sessionServices.refresh();
-
-            response.sendRedirect("/");
+            response.sendRedirect("/git2");
         }
 
         if ((Integer) request

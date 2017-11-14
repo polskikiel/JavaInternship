@@ -16,5 +16,4 @@ public class MySession {
 
     UserDto user;
 
-    boolean refresh = false;
 }

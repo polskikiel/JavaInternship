@@ -60,14 +60,6 @@ public class MySessionServices {
     }
 
 
-    public void refresh() {         // we want that user again
-        mySession.setRefresh(true);
-    }
-
-    public boolean getRefresh() {
-        return mySession.isRefresh();
-    }
-
     public boolean checkState(String state) {       // check for third party
         try {
             return mySession.getState().equals(state);
@@ -81,7 +73,6 @@ public class MySessionServices {
     }
 
     public String getToken() {
-        mySession.setRefresh(false);
         return mySession.getAccessToken();
     }
 

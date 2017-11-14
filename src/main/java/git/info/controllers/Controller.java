@@ -19,10 +19,6 @@ public class Controller {
     @GetMapping({"", "/"})
     public String getAuth() {
 
-        if (sessionServices.getRefresh()) { // use token from session to refresh user data
-            return "redirect:/git2";
-        }
-
         if(sessionServices.hasUser())   // if session contains user we don't need to get it from Github
             return "redirect:/info";
 
@@ -31,7 +27,7 @@ public class Controller {
     }
 
     @RequestMapping("/git")     // GIT CALLBACK URL
-    public String git(@RequestParam("code") String code,
+    public String getToken(@RequestParam("code") String code,
                       @RequestParam("state") String state) {
 
         if (!sessionServices.checkState(state) || code == null) {
@@ -45,18 +41,23 @@ public class Controller {
     }
 
     @RequestMapping("/git2")
-    public String git2() {
+    public String setUser() {
 
-        sessionServices.setUser(
-                gitServices.getUserInfo(sessionServices.getToken()));
+        try {
+            sessionServices.setUser(
+                    gitServices.getUserInfo(sessionServices.getToken()));
+
+        } catch (NullPointerException npe) {
+            return "redirect:/";
+        }
 
         return "redirect:/info";
     }
 
 
-    @GetMapping("/info")    // this one in the end displays received model
+    @GetMapping("/info")
     public String info(Model model) {
-        if (!sessionServices.hasUser() || sessionServices.getRefresh()) {   // and go back if don't
+        if (!sessionServices.hasUser()) {   // and go back if don't
             return "redirect:/";
         }
         model.addAttribute("user", sessionServices.getUser());
