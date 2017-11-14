@@ -19,8 +19,8 @@ public class Controller {
     @GetMapping({"", "/"})
     public String getAuth() {
 
-        if(sessionServices.hasUser())   // if session contains user we don't need to get it from Github
-            return "redirect:/info";
+        if(sessionServices.hasUser())   // if session contains user only refresh
+            return "redirect:/git2";
 
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
