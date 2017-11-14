@@ -31,8 +31,11 @@ public class MySessionServices {
             list.add(repoDto.getLanguage());
         }
 
+        // group list by language and set their number of occurrences as value
+
         Map<String, Integer> map =
-                list.stream().collect(Collectors.toMap(o -> o, o -> 1, Integer::sum));
+                list.stream().collect(Collectors.toMap(o -> o, o->1, Integer::sum));
+
 
         return map;
     }
@@ -45,9 +48,22 @@ public class MySessionServices {
                     forEach(repo -> repo.getLanguagesMap().
                             forEach((key, value) -> map.merge(key, value, Integer::sum)));
 
+            //merging both maps in one, putting their sum as value
+
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
+
+        // sorting by value
+
+        return sortMapByValue(map);
+    }
+
+    private Map<String, Integer> sortMapByValue(Map<String, Integer> map) {
+
+        List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
+
+        Collections.sort(list, Comparator.comparing(map::get));
 
         return map;
     }
