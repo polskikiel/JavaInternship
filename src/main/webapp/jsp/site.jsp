@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<main class="site mrg-5">
 <section class="userInfo mrg-2 col-3">
     <h2>Profile</h2>
 
@@ -78,5 +79,7 @@
     </c:forEach>
 </section>
 <div style="clear: both"></div>
+
+</main>
 </body>
 </html>

@@ -6,7 +6,7 @@ body {
     background-color: #cfcfcf;
 }
 
-.userInfo {
+.site {
     margin-top: 15px;
 }
 .userInfo img {
@@ -18,9 +18,6 @@ body {
     font-size: 16px;
     text-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
 
-}
-.publicRepos {
-    margin-top: 15px;
 }
 a {
     text-decoration: none;
@@ -50,7 +47,7 @@ h3 {
     }
 
     [class*="mrg-"] {
-        margin-left: 36%;
+        margin-left: 28%;
     }
 }
 
