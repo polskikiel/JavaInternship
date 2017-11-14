@@ -3,6 +3,7 @@ package git.info.services;
 import git.info.components.MySession;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
+import git.info.util.MyMaps;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +38,7 @@ public class MySessionServices {
                 list.stream().collect(Collectors.toMap(o -> o, o->1, Integer::sum));
 
 
-        return sortMapByValue(map);
+        return MyMaps.sortMapByValue(map);
     }
 
     public Map<String, Integer> mergedLanguageMaps() {  // each language bytes from every repo
@@ -55,25 +56,10 @@ public class MySessionServices {
         }
 
         // sorting by value
-        return sortMapByValue(map);
+        return MyMaps.sortMapByValue(map);
     }
 
-    private Map<String, Integer> sortMapByValue(Map<String, Integer> map) {
 
-        Map<String, Integer> map1 =  map.entrySet().stream().    //  iterate through map entries
-                sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
-                collect(Collectors.toMap(
-                Map.Entry::getKey,
-                Map.Entry::getValue   //  then collect it to HashMap with same key and value
-        ));
-
-        System.out.println(map);
-        System.out.println(map1);
-
-        return map1;
-
-
-    }
 
 
     public boolean checkState(String state) {       // check for third party

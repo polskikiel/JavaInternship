@@ -4,6 +4,7 @@ import git.info.dto.AccessTokenDto;
 import git.info.dto.RepoDto;
 import git.info.dto.UserDto;
 import git.info.util.MyJson;
+import git.info.util.MyMaps;
 import lombok.Getter;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +96,9 @@ public class GitServices {
 
                 JSONObject object = new JSONObject(sb.toString());
 
-                repoDto.setLanguagesMap(MyJson.toMap(object));   // convert JSON to Map<String, Integer>
+                repoDto.setLanguagesMap(
+                        MyMaps.sortMapByValue(
+                                MyJson.toMap(object)));   // convert and sort JSON to Map<String, Integer>
 
             } catch (Exception e) {
                 e.printStackTrace();
