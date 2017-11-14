@@ -35,7 +35,7 @@ public class Controller {
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        if (sessionServices.getToken() != null && !sessionServices.getToken().isEmpty()) {
+        if (sessionServices.getToken() != null) {
             sessionServices.setToken(gitServices.getAccessToken(code));
         }
 
