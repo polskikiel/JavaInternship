@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<main class="site">
 <section class="userInfo mrg-2 col-3">
     <h2>Profile</h2>
 
@@ -61,7 +60,10 @@
             <p>
 
             <p style="font-size: 10px;">
-                written in ${repo.language}
+                written in ${repo.language}<br/>
+            <c:forEach items="${repo.languagesMap}" var="entry">
+                ${entry.key} - ${entry.value}
+            </c:forEach>
             </p>
 
             <p style="font-size: 14px">
@@ -79,7 +81,5 @@
     </c:forEach>
 </section>
 <div style="clear: both"></div>
-
-</main>
 </body>
 </html>
