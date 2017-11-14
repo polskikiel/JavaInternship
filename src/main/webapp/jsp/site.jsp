@@ -12,7 +12,7 @@
 <body>
 
 <main class="site">
-<section class="userInfo mrg-2 col-5">
+<section class="userInfo mrg-2 col-3">
     <h2>Profile</h2>
 
     <a href="${user.html_url}">
@@ -50,7 +50,7 @@
     <br/>
 </section>
 
-<section class="publicRepos mrg-2 col-7">
+<section class="publicRepos mrg-2 col-5">
     <h2>Public repositories</h2>
     <br/>
 
