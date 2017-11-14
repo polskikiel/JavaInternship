@@ -51,6 +51,7 @@ body {
 .site {
     margin-top: 15px;
 }
+
 .userInfo img {
     height: 60px;
     width: 60px;
@@ -79,7 +80,6 @@ h3 {
 
 }
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
     [class*="col-"] {
     width: 100%;
     padding: 0;
@@ -89,6 +89,6 @@ h3 {
     [class*="mrg-"] {
     margin-left: 0%;
 }
-}
 
+}
 
