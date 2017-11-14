@@ -1,5 +1,6 @@
 package git.info.util;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -10,7 +11,9 @@ public class MyMaps {
                 sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
                 collect(Collectors.toMap(
                 Map.Entry::getKey,
-                Map.Entry::getValue   //  then collect it to HashMap with same key and value
+                Map.Entry::getValue,   //  then collect it to HashMap with same key and value
+                (integer, integer2) -> integer,
+                HashMap::new
         ));
 
         return map1;
