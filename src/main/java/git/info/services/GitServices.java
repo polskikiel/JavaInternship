@@ -74,7 +74,7 @@ public class GitServices {
 
 
         for (RepoDto repoDto : repoDtos) {
-            try {       // my way to map various languages which we can get in JSON response
+            try {       // my way to map various languages attributes which we can get in JSON response
 
                 StringBuilder sb = new StringBuilder();
 
@@ -99,6 +99,7 @@ public class GitServices {
                 repoDto.setLanguagesMap(
                         MyMaps.sortMapByValue(
                                 MyJson.toMap(object)));   // convert and sort JSON to Map<String, Integer>
+
 
             } catch (Exception e) {
                 e.printStackTrace();
