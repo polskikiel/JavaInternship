@@ -60,13 +60,18 @@ public class MySessionServices {
 
     private Map<String, Integer> sortMapByValue(Map<String, Integer> map) {
 
-        return
-                map.entrySet().stream().    //  iterate through map entries
-                        sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
-                        collect(Collectors.toMap(
-                                Map.Entry::getKey,
-                                Map.Entry::getValue   //  then collect it to HashMap with same key and value
-                        ));
+        Map<String, Integer> map1 =  map.entrySet().stream().    //  iterate through map entries
+                sorted(Map.Entry.comparingByValue()). //  sorting it by value descending
+                collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue   //  then collect it to HashMap with same key and value
+        ));
+
+        System.out.println(map);
+        System.out.println(map1);
+
+        return map1;
+
 
     }
 
