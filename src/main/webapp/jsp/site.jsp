@@ -31,7 +31,7 @@
     <br/>
     <h3>Language statistics</h3>
 
-    <h4>Projects written in:</h4>
+    <h4>Projects written in</h4>
 
 
     <c:forEach items="${usedLanguagesMap}" var="entry">
@@ -39,7 +39,7 @@
     </c:forEach>
     <br/>
 
-    <h4>Number of all bytes written by you in every language</h4>
+    <h4>All together</h4>
 
     <c:forEach items="${mergedLanguageMaps}" var="entry">
         <p style="font-size: 14px;">${entry.key} - ${entry. value}</p>
@@ -61,7 +61,7 @@
 
             <p style="font-size: 10px;">
             <c:forEach items="${repo.languagesMap}" var="entry">
-                ${entry.key} - ${entry.value}&nbsp;&nbsp;&nbsp;
+                ${entry.key} - ${entry.value}&nbsp;&nbsp;&nbsp;&nbsp;
             </c:forEach>
             </p>
 
