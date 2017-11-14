@@ -60,9 +60,8 @@
             <p>
 
             <p style="font-size: 10px;">
-                written in ${repo.language}<br/>
             <c:forEach items="${repo.languagesMap}" var="entry">
-                ${entry.key} - ${entry.value}
+                ${entry.key} - ${entry.value}&nbsp;&nbsp;&nbsp;
             </c:forEach>
             </p>
 
