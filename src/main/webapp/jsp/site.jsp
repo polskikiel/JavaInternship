@@ -59,7 +59,7 @@
                 <a href="${repo.html_url}">${repo.name}</a>
             <p>
 
-            <p style="font-size: 10px;">
+            <p style="font-size: 10px; font-weight: 600;">
             <c:forEach items="${repo.languagesMap}" var="entry">
                 ${entry.key} - ${entry.value}&nbsp;&nbsp;&nbsp;&nbsp;
             </c:forEach>
