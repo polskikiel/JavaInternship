@@ -15,4 +15,6 @@ public class MySession {
     String accessToken;
 
     UserDto user;
+
+    boolean refresh = false;
 }

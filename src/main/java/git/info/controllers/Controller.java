@@ -19,7 +19,7 @@ public class Controller {
     @GetMapping({"", "/"})
     public String getAuth() {
 
-        if(sessionServices.hasUser())   // if session contains user we don't need to get it from Github
+        if(sessionServices.hasUser() || sessionServices.getRefresh())   // if session contains user we don't need to get it from Github
             return "redirect:/info";
 
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
@@ -35,11 +35,23 @@ public class Controller {
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        sessionServices.setToken(gitServices.getAccessToken(code));
-        sessionServices.setUser(gitServices.getUserInfo(sessionServices.getToken()));
+        if (sessionServices.getToken() != null && !sessionServices.getToken().isEmpty()) {
+            sessionServices.setToken(gitServices.getAccessToken(code));
+        }
+
+        sessionServices.setUser(
+                gitServices.getUserInfo(sessionServices.getToken()));
+
 
         return "redirect:/info";
     }
+
+    @RequestMapping("/refresh")
+    public String refresh() {
+        sessionServices.refresh();  // set flag on true
+        return "redirect:/";
+    }
+
 
     @GetMapping("/info")    // this one in the end displays received model
     public String info(Model model) {

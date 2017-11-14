@@ -38,6 +38,7 @@ public class MySessionServices {
                 list.stream().collect(Collectors.toMap(o -> o, o->1, Integer::sum));
 
 
+        // sorting by value
         return MyMaps.sortMapByValue(map);
     }
 
@@ -55,12 +56,17 @@ public class MySessionServices {
             npe.printStackTrace();
         }
 
-        // sorting by value
         return MyMaps.sortMapByValue(map);
     }
 
 
+    public void refresh() {         // we want that user again
+        mySession.setRefresh(true);
+    }
 
+    public boolean getRefresh() {
+        return mySession.isRefresh();
+    }
 
     public boolean checkState(String state) {       // check for third party
         try {
@@ -75,6 +81,7 @@ public class MySessionServices {
     }
 
     public String getToken() {
+        mySession.setRefresh(false);
         return mySession.getAccessToken();
     }
 
