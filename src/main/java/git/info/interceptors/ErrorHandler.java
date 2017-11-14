@@ -21,7 +21,9 @@ public class ErrorHandler implements HandlerInterceptor {
         HttpSession session = request.getSession(true);
 
         if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*60*1) {
-            response.sendRedirect("/refresh");
+            sessionServices.refresh();
+
+            response.sendRedirect("/");
         }
 
         if ((Integer) request

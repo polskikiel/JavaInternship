@@ -19,7 +19,11 @@ public class Controller {
     @GetMapping({"", "/"})
     public String getAuth() {
 
-        if(sessionServices.hasUser() || sessionServices.getRefresh())   // if session contains user we don't need to get it from Github
+        if (sessionServices.getRefresh()) { // use token from session to refresh user data
+            return "redirect:/git2";
+        }
+
+        if(sessionServices.hasUser())   // if session contains user we don't need to get it from Github
             return "redirect:/info";
 
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
@@ -31,31 +35,28 @@ public class Controller {
                       @RequestParam("state") String state) {
 
         if (!sessionServices.checkState(state) || code == null) {
-            return "redirect:/errors";
+            return "redirect:/errors?nr=401";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        if (sessionServices.getToken() != null) {
-            sessionServices.setToken(gitServices.getAccessToken(code));
-        }
+        sessionServices.setToken(gitServices.getAccessToken(code));
+
+        return "redirect:/git2";
+    }
+
+    @RequestMapping("/git2")
+    public String git2() {
 
         sessionServices.setUser(
                 gitServices.getUserInfo(sessionServices.getToken()));
 
-
         return "redirect:/info";
-    }
-
-    @RequestMapping("/refresh")
-    public String refresh() {
-        sessionServices.refresh();  // set flag on true
-        return "redirect:/";
     }
 
 
     @GetMapping("/info")    // this one in the end displays received model
     public String info(Model model) {
-        if (!sessionServices.hasUser()) {   // and go back if don't
+        if (!sessionServices.hasUser() || sessionServices.getRefresh()) {   // and go back if don't
             return "redirect:/";
         }
         model.addAttribute("user", sessionServices.getUser());
