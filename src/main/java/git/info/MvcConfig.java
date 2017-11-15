@@ -1,6 +1,6 @@
 package git.info;
 
-import git.info.interceptors.ErrorHandler;
+import git.info.interceptors.MainInterceptor;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -9,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @AllArgsConstructor
 public class MvcConfig extends WebMvcConfigurerAdapter{
-    ErrorHandler errorHandler;
+    MainInterceptor mainInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(errorHandler).addPathPatterns("/**");
+        registry.addInterceptor(mainInterceptor).addPathPatterns("/**");
     }
 }

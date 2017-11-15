@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @Component
 @AllArgsConstructor
-public class ErrorHandler implements HandlerInterceptor {
+public class MainInterceptor implements HandlerInterceptor {
 
     MySessionServices sessionServices;
 
@@ -20,7 +20,7 @@ public class ErrorHandler implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
 
-        if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*60*1) {
+        if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*3) {   // 3s refresh
             response.sendRedirect("/git2");
         }
 
