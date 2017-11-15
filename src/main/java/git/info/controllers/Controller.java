@@ -18,6 +18,7 @@ public class Controller {
 
     @GetMapping({"", "/"})
     public String getAuth() {
+
         if(sessionServices.getToken() != null)
             return "redirect:/git2";
 
@@ -46,7 +47,8 @@ public class Controller {
             sessionServices.setUser(
                     gitServices.getUserInfo(sessionServices.getToken()));
 
-        } catch (NullPointerException npe) {
+        } catch (Exception npe) {
+            sessionServices.setToken(null);
             return "redirect:/";
         }
 
@@ -57,6 +59,7 @@ public class Controller {
     @GetMapping("/info")
     public String info(Model model) {
         if (!sessionServices.hasUser()) {   // and go back if don't
+            sessionServices.setToken(null);
             return "redirect:/";
         }
         model.addAttribute("user", sessionServices.getUser());
@@ -73,6 +76,8 @@ public class Controller {
 
         ModelAndView errorPage = new ModelAndView("error");
         String errorMsg;
+
+        sessionServices.setToken(null);
 
         switch (nr) {
             case 400: {
