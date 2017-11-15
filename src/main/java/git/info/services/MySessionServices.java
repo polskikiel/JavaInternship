@@ -90,8 +90,4 @@ public class MySessionServices {
         return mySession != null && mySession.getUser() != null;
     }
 
-    public boolean hasToken() {
-        return mySession != null && mySession.getAccessToken() != null;
-    }
-
 }
