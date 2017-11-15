@@ -25,6 +25,7 @@ public class MySessionServices {
         return mySession.getState();
     }
 
+
     public Map<String, Integer> getMainRepoLanguages() {  // count main languages in every repo
         List<String > list = new ArrayList<>();
 
@@ -35,7 +36,8 @@ public class MySessionServices {
         // group list by language and set number of their occurrences as value
 
         Map<String, Integer> map =
-                list.stream().collect(Collectors.toMap(o -> o, o->1, Integer::sum));
+                list.stream().collect(
+                        Collectors.toMap(o -> o, o->1, Integer::sum));
 
 
         // sorting by value
