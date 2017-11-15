@@ -18,11 +18,6 @@ public class Controller {
 
     @GetMapping({"", "/"})
     public String getAuth() {
-
-        if (sessionServices.hasToken()) {
-            return "redirect:/git2";
-        }
-
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
