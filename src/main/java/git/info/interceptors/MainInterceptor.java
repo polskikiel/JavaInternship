@@ -20,7 +20,7 @@ public class MainInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
 
-        if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*3) {   // 3s refresh
+        if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*5) {   // 5s refresh
             response.sendRedirect("/git2");
         }
 
