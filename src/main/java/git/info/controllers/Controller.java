@@ -22,6 +22,8 @@ public class Controller {
         if(sessionServices.getToken() != null)
             return "redirect:/git2";
 
+        //  connect with github api
+        //  ask for permissions
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
@@ -41,15 +43,14 @@ public class Controller {
     }
 
     @RequestMapping("/git2")
-    public String setUser() {
+    public String setUser() {       // data refresh
 
         try {
-            sessionServices.setUser(
+            sessionServices.setUser(            // repos, user info
                     gitServices.getUserInfo(sessionServices.getToken()));
 
         } catch (Exception npe) {
-            sessionServices.setToken(null);
-            return "redirect:/";
+            return "redirect:/errors?nr=401";
         }
 
         return "redirect:/info";
@@ -58,9 +59,8 @@ public class Controller {
 
     @GetMapping("/info")
     public String info(Model model) {
-        if (!sessionServices.hasUser()) {   // and go back if don't
-            sessionServices.setToken(null);
-            return "redirect:/";
+        if (!sessionServices.hasUser()) {   // authorize again
+            return "redirect:/errors?nr=404";
         }
         model.addAttribute("user", sessionServices.getUser());
 
@@ -71,12 +71,14 @@ public class Controller {
         return "site";
     }
 
-    @RequestMapping("/errors")  // custom error handling page
+    @RequestMapping("/errors")
     public ModelAndView renderErrorPage(@RequestParam("nr") Integer nr) {
 
         ModelAndView errorPage = new ModelAndView("error");
         String errorMsg;
 
+
+        // authorize again after every error
         sessionServices.setToken(null);
 
         switch (nr) {
