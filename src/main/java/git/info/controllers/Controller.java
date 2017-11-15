@@ -72,42 +72,13 @@ public class Controller {
     }
 
     @RequestMapping("/errors")
-    public ModelAndView renderErrorPage(@RequestParam("nr") Integer nr) {
-
-        ModelAndView errorPage = new ModelAndView("error");
-        String errorMsg;
+    public String renderErrorPage(@RequestParam("nr") Integer nr) {
 
 
         // authorize again after every error
         sessionServices.setToken(null);
 
-        switch (nr) {
-            case 400: {
-                errorMsg = "Http Error Code: 400. Bad Request";
-                break;
-            }
-            case 401: {
-                errorMsg = "Http Error Code: 401. Unauthorized";
-                break;
-            }
-            case 403:{
-                errorMsg = "Http Error Code: 403. Too much requests";   // from git api docs - 403 Forbidden
-                break;
-            }
-            case 404: {
-                errorMsg = "Http Error Code: 404. Resource not found";
-                break;
-            }
-            case 500: {
-                errorMsg = "Http Error Code: 500. Internal Server Error";
-                break;
-            }
-            default:{
-                errorMsg = "Ups! Something is not ok";
-            }
-        }
-        errorPage.addObject("errorMsg", errorMsg);
-        return errorPage;
+        return "redirect:/";
     }
 
 }
