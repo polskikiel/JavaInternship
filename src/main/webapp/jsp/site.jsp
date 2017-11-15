@@ -39,7 +39,7 @@
     </c:forEach>
     <br/>
 
-    <h4>All together</h4>
+    <h4>All bytes together</h4>
 
     <c:forEach items="${mergedLanguageMaps}" var="entry">
         <p style="font-size: 14px;">${entry.key} - ${entry. value}</p>
