@@ -23,7 +23,7 @@ public class Controller {
     @GetMapping({"", "/"})
     public String getAuth(@CookieValue("gittoken") String token) {
 
-        if(sessionServices.getToken() != null || token != null)      // if we get token already we can go straight to the user data
+        if(sessionServices.getToken() != null || !token.isEmpty())      // if we get token already we can go straight to the user data
             return "redirect:/git2";
 
         //  connect with github api
@@ -54,7 +54,7 @@ public class Controller {
     @RequestMapping("/git2")
     public String setUser(@CookieValue("gittoken") String token) {       // data refresh
 
-        if (token != null) {
+        if (!token.isEmpty()) {
             try {
                 sessionServices.setUser(
                         gitServices.getUserInfo(token));
