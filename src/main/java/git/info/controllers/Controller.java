@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @org.springframework.stereotype.Controller
 @AllArgsConstructor
 public class Controller {
@@ -30,14 +33,18 @@ public class Controller {
 
     @RequestMapping("/git")     // GIT CALLBACK URL
     public String getToken(@RequestParam("code") String code,
-                      @RequestParam("state") String state) {
+                           @RequestParam("state") String state,
+                           HttpServletResponse response) {
 
         if (!sessionServices.checkState(state) || code == null) {
             return "redirect:/errors?nr=401";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        sessionServices.setToken(gitServices.getAccessToken(code));
+        String accessToken = gitServices.getAccessToken(code);
+        sessionServices.setToken(accessToken);
+        response.addCookie(new Cookie("tkn", accessToken));
+
 
         return "redirect:/git2";
     }

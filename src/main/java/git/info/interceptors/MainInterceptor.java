@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,12 @@ public class MainInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
+        String s =   WebUtils.getCookie(request, "tkn").getValue();
+
+        if(s != null)
+            sessionServices.setToken(s);
+
+        System.out.println(s);
 
         if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*5) {   // 5s refresh
             response.sendRedirect("/git2");
