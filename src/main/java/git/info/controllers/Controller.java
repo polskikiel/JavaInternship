@@ -20,13 +20,18 @@ public class Controller {
     MySessionServices sessionServices;
 
     @GetMapping({"", "/"})
-    public String getAuth() {
+    public String getMain() {
 
         if(sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
             return "redirect:/git2";
 
         //  connect with github api
         //  ask for permissions
+        return "redirect:/auth";
+    }
+
+    @RequestMapping("/auth")
+    public String getAuth() {
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
@@ -85,7 +90,6 @@ public class Controller {
 
         // authorize again after every error
         sessionServices.setToken(null);
-
 
         return "redirect:/";
     }

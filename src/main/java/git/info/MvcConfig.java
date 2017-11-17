@@ -14,6 +14,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(mainInterceptor).addPathPatterns("/**")
-        .excludePathPatterns("/git", "/errors*");
+        .excludePathPatterns("/git", "/errors*", "/");
     }
 }
