@@ -4,6 +4,7 @@ import git.info.services.GitServices;
 import git.info.services.MySessionServices;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +18,21 @@ public class Controller {
     MySessionServices sessionServices;
 
     @GetMapping({"", "/"})
-    public String getAuth() {
+    public String getDecision(@CookieValue("tkn") String tkn) {
+
+        System.out.println(tkn);
 
         if(sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
             return "redirect:/git2";
 
         //  connect with github api
         //  ask for permissions
+
+        return "redirect:/auth";
+    }
+
+    @GetMapping("/auth")
+    public String getAuth() {
         return "redirect:https://github.com/login/oauth/authorize?client_id=" + gitServices.getGitId() +
                 "&scope=" + "repo" + "&state=" + sessionServices.getState();
     }
