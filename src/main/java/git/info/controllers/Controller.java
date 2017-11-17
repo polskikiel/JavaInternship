@@ -4,10 +4,14 @@ import git.info.services.GitServices;
 import git.info.services.MySessionServices;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @org.springframework.stereotype.Controller
 @AllArgsConstructor
@@ -17,7 +21,9 @@ public class Controller {
     MySessionServices sessionServices;
 
     @GetMapping({"", "/"})
-    public String getAuth() {
+    public String getAuth(@CookieValue("tkn") String tkn) {
+
+        System.out.println(tkn);
 
         if(sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
             return "redirect:/git2";
@@ -30,14 +36,18 @@ public class Controller {
 
     @RequestMapping("/git")     // GIT CALLBACK URL
     public String getToken(@RequestParam("code") String code,
-                      @RequestParam("state") String state) {
+                           @RequestParam("state") String state,
+                           HttpServletResponse response) {
 
         if (!sessionServices.checkState(state) || code == null) {
             return "redirect:/errors?nr=401";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        sessionServices.setToken(gitServices.getAccessToken(code));
+        String accessToken = gitServices.getAccessToken(code);  // get token for this user from git
+
+        sessionServices.setToken(accessToken);
+        response.addCookie(new Cookie("tkn", accessToken)); // cache token in user memory
 
         return "redirect:/git2";
     }
