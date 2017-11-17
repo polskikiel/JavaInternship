@@ -4,15 +4,10 @@ import git.info.services.GitServices;
 import git.info.services.MySessionServices;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @org.springframework.stereotype.Controller
 @AllArgsConstructor
@@ -22,11 +17,9 @@ public class Controller {
     MySessionServices sessionServices;
 
     @GetMapping({"", "/"})
-    public String getAuth(@CookieValue("tkn") String tkn) {
+    public String getAuth() {
 
-        System.out.println(tkn);
-
-        if (sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
+        if(sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
             return "redirect:/git2";
 
         //  connect with github api
@@ -37,22 +30,14 @@ public class Controller {
 
     @RequestMapping("/git")     // GIT CALLBACK URL
     public String getToken(@RequestParam("code") String code,
-                           @RequestParam("state") String state,
-                           HttpServletResponse response,
-                           HttpServletRequest request) {
+                      @RequestParam("state") String state) {
 
         if (!sessionServices.checkState(state) || code == null) {
             return "redirect:/errors?nr=401";
             // "If the states don't match, the request was created by a third party and the process should be aborted."
         }
 
-        String accessToken = gitServices.getAccessToken(code);  // get token for this user from git
-
-        sessionServices.setToken(accessToken);
-
-        if (request
-                .getAttribute("javax.servlet.error.status_code") != null)
-            response.addCookie(new Cookie("tkn", accessToken)); // cache token in user memory
+        sessionServices.setToken(gitServices.getAccessToken(code));
 
         return "redirect:/git2";
     }
