@@ -20,12 +20,12 @@ public class MainInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
-        String s =   WebUtils.getCookie(request, "tkn").getValue();
+        if (WebUtils.getCookie(request, "tkn") != null) {
+            sessionServices.setToken(WebUtils.getCookie(request, "tkn").getValue());
+        }
 
-        if(s != null)
-            sessionServices.setToken(s);
 
-        System.out.println(s);
+
 
         if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*5) {   // 5s refresh
             response.sendRedirect("/git2");
