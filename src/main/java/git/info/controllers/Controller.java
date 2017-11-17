@@ -86,6 +86,7 @@ public class Controller {
         // authorize again after every error
         sessionServices.setToken(null);
 
+
         return "redirect:/";
     }
 
