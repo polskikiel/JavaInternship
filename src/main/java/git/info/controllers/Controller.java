@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @org.springframework.stereotype.Controller
@@ -25,7 +26,7 @@ public class Controller {
 
         System.out.println(tkn);
 
-        if(sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
+        if (sessionServices.getToken() != null)      // if we get token already we can go straight to the user data
             return "redirect:/git2";
 
         //  connect with github api
@@ -37,7 +38,8 @@ public class Controller {
     @RequestMapping("/git")     // GIT CALLBACK URL
     public String getToken(@RequestParam("code") String code,
                            @RequestParam("state") String state,
-                           HttpServletResponse response) {
+                           HttpServletResponse response,
+                           HttpServletRequest request) {
 
         if (!sessionServices.checkState(state) || code == null) {
             return "redirect:/errors?nr=401";
@@ -47,7 +49,10 @@ public class Controller {
         String accessToken = gitServices.getAccessToken(code);  // get token for this user from git
 
         sessionServices.setToken(accessToken);
-        response.addCookie(new Cookie("tkn", accessToken)); // cache token in user memory
+
+        if (request
+                .getAttribute("javax.servlet.error.status_code") != null)
+            response.addCookie(new Cookie("tkn", accessToken)); // cache token in user memory
 
         return "redirect:/git2";
     }
