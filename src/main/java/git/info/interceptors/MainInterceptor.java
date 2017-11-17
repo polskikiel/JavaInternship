@@ -7,6 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,12 +21,13 @@ public class MainInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
-        if (WebUtils.getCookie(request, "tkn") != null) {
-            sessionServices.setToken(WebUtils.getCookie(request, "tkn").getValue());
+
+        Cookie tkn = WebUtils.getCookie(request, "tkn");        // caching github auth token in cookie
+        if (tkn != null &&
+                !tkn.getValue().equals(sessionServices.getToken())) {
+
+            sessionServices.setToken(tkn.getValue());
         }
-
-
-
 
         if (System.currentTimeMillis() - session.getLastAccessedTime() > 1000*5) {   // 5s refresh
             response.sendRedirect("/git2");
