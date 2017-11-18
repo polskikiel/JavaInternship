@@ -50,7 +50,7 @@ public class Controller {
         sessionServices.setToken(accessToken);
 
         Cookie cookie = new Cookie("tkn", accessToken);
-        cookie.setMaxAge(86400000); // 1 day in milliseconds
+        cookie.setMaxAge(3600); // 1 day in seconds
 
         response.addCookie(cookie);
 
