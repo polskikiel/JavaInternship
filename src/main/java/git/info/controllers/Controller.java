@@ -51,8 +51,8 @@ public class Controller {
 
         Cookie cookie = new Cookie("tkn", accessToken);
         cookie.setMaxAge(86400000); // 1 day in milliseconds
-        response.addCookie(new Cookie("tkn", accessToken));
 
+        response.addCookie(cookie);
 
         return "redirect:/git2";
     }
