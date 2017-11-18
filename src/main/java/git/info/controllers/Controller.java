@@ -48,6 +48,9 @@ public class Controller {
 
         String accessToken = gitServices.getAccessToken(code);
         sessionServices.setToken(accessToken);
+
+        Cookie cookie = new Cookie("tkn", accessToken);
+        cookie.setMaxAge(86400000); // 1 day in milliseconds
         response.addCookie(new Cookie("tkn", accessToken));
 
 
